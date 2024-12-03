@@ -1,5 +1,4 @@
 name: Docker Image CI
-
 on:
   workflow_call:
   workflow_dispatch:
@@ -35,7 +34,7 @@ jobs:
           IMAGE_SHA=$(docker inspect --format='{{index .Id}}' $IMAGE_ID:$IMAGE_TAG)
           echo "::set-output name=image_sha::$IMAGE_SHA"
 
-      - name: Push Docker image if scan is successful
+      - name: Push Docker image 
         if: success()
         run: |
           IMAGE_ID=ghcr.io/${{ github.repository }}
