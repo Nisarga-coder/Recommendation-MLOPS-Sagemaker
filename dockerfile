@@ -16,12 +16,16 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Set environment variables
+# Set environment variables for AWS SageMaker endpoint
 ENV AWS_REGION=us-west-2 \
     MODEL_ENDPOINT=your-sagemaker-endpoint
 
-# Expose the port the app runs on
+# Expose the port the app will run on
 EXPOSE 8080
 
-# Command to run the application
-CMD ["python", "app.py"]
+# Command to run the application with Gunicorn
+# Includes:
+# - Binding to 0.0.0.0:8080
+# - Using 4 worker processes
+# - Enabling worker thread concurrency
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "4", "--threads", "2", "app:app"]
