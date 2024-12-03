@@ -21,8 +21,8 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: ${{ github.Nisarga-coder}}
-          password: ${{ secrets.HACKER}}
+          username: ${{ github.actor}}
+          password: ${{ secrets.RECOPROJECT}}
 
       - name: Build Docker image
         id: build_image
