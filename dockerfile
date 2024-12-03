@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 
 # Install Python dependencies
 COPY requirements.txt 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Set environment variables for AWS SageMaker endpoint
 ENV AWS_REGION=us-west-2 \
